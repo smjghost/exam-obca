@@ -1,0 +1,6 @@
+{
+  "name": "OBCA 备考中心",
+  "description": "OceanBase OBCA V4.0 认证全真备考题库（89单选 + 50多选 + 40判断）与考点精炼系统。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
