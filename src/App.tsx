@@ -232,14 +232,14 @@ export default function App() {
       </nav>
 
       {/* Main Content Stage */}
-      <main className="flex-1 h-[100dvh] overflow-y-auto bg-[#0a0f18] pt-16 lg:pt-0 relative custom-scrollbar w-full" style={{ WebkitOverflowScrolling: 'touch' }}>
+      <main className="flex-1 min-w-0 max-w-full h-[100dvh] overflow-y-auto overflow-x-hidden bg-[#0a0f18] pt-16 lg:pt-0 relative custom-scrollbar w-full" style={{ WebkitOverflowScrolling: 'touch' }}>
         {/* Ambient Grid Pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808010_1px,transparent_1px),linear-gradient(to_bottom,#80808010_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
 
-        <div className="max-w-4xl mx-auto px-4 py-6 pb-24 lg:px-10 lg:py-10 relative z-10 min-h-full">
+        <div className="max-w-4xl mx-auto px-3.5 sm:px-6 py-4 sm:py-6 pb-24 lg:px-10 lg:py-10 relative z-10 min-h-full min-w-0 w-full">
           
           {/* Top Mode Header / Tabs Bar */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-4 border-b border-slate-800/80">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8 pb-4 border-b border-slate-800/80">
             <div>
               <div className="flex items-center gap-2">
                 <span className="px-2.5 py-1 rounded-md bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-mono text-xs font-bold uppercase tracking-wider">
@@ -249,12 +249,12 @@ export default function App() {
                 </span>
                 <span className="text-xs text-slate-400">OBCA V4.0 全真备考</span>
               </div>
-              <h2 className="text-2xl lg:text-3xl font-black text-slate-100 tracking-tight mt-2">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-slate-100 tracking-tight mt-2 break-words">
                 {viewMode === 'cards' && activeTopic.title}
                 {viewMode === 'quiz' && `真题速测与解析 (${examQuestions.length} 题)`}
                 {viewMode === 'reference' && '核心端口、视图与架构速查表'}
               </h2>
-              <p className="text-xs lg:text-sm text-slate-400 mt-1">
+              <p className="text-xs lg:text-sm text-slate-400 mt-1 break-words">
                 {viewMode === 'cards' && activeTopic.description}
                 {viewMode === 'quiz' && '支持单选/多选/判断题型筛选，支持选项模拟自测与即时查看官方权威考点解析'}
                 {viewMode === 'reference' && '一键速查 OBServer 2881/2882、OBProxy 2883、OCP 8080、F/R/L 副本权限与常用性能视图'}
@@ -262,10 +262,10 @@ export default function App() {
             </div>
 
             {/* Quick Switch Buttons on Top Right */}
-            <div className="flex items-center gap-1.5 p-1 bg-slate-900/90 border border-slate-800 rounded-xl shrink-0 self-start sm:self-auto">
+            <div className="flex items-center gap-1.5 p-1 bg-slate-900/90 border border-slate-800 rounded-xl shrink-0 self-start sm:self-auto overflow-x-auto max-w-full">
               <button
                 onClick={() => setViewMode('cards')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap ${
                   viewMode === 'cards' ? 'bg-cyan-500 text-slate-950 font-bold' : 'text-slate-400 hover:text-slate-200'
                 }`}
               >
@@ -273,7 +273,7 @@ export default function App() {
               </button>
               <button
                 onClick={() => setViewMode('quiz')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap ${
                   viewMode === 'quiz' ? 'bg-cyan-500 text-slate-950 font-bold' : 'text-slate-400 hover:text-slate-200'
                 }`}
               >
@@ -281,7 +281,7 @@ export default function App() {
               </button>
               <button
                 onClick={() => setViewMode('reference')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap ${
                   viewMode === 'reference' ? 'bg-cyan-500 text-slate-950 font-bold' : 'text-slate-400 hover:text-slate-200'
                 }`}
               >
@@ -292,7 +292,7 @@ export default function App() {
 
           {/* VIEW 1: Knowledge Cards Mode */}
           {viewMode === 'cards' && (
-            <div className="space-y-6">
+            <div className="space-y-6 min-w-0 w-full">
               {/* Card Search Box */}
               <div className="relative">
                 <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -306,7 +306,7 @@ export default function App() {
               </div>
 
               {/* Sections List */}
-              <div className="grid gap-6">
+              <div className="grid gap-5 sm:gap-6 min-w-0 w-full">
                 {filteredSections.map((section, idx) => {
                   let cardStyle = '';
                   let iconNode = null;
@@ -314,36 +314,36 @@ export default function App() {
 
                   if (section.type === 'high-freq') {
                     cardStyle = 'border-amber-500/30 bg-gradient-to-br from-amber-500/10 to-slate-900/60 shadow-[0_0_20px_rgba(245,158,11,0.05)]';
-                    iconNode = <Target className="w-5 h-5 text-amber-400" />;
+                    iconNode = <Target className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400" />;
                     badgeText = '高频必考';
                   } else if (section.type === 'trap') {
                     cardStyle = 'border-rose-500/30 bg-gradient-to-br from-rose-500/10 to-slate-900/60 shadow-[0_0_20px_rgba(244,63,94,0.05)]';
-                    iconNode = <AlertTriangle className="w-5 h-5 text-rose-400" />;
+                    iconNode = <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5 text-rose-400" />;
                     badgeText = '真题陷阱';
                   } else if (section.type === 'formula') {
                     cardStyle = 'border-blue-500/30 bg-gradient-to-br from-blue-500/10 to-slate-900/60 shadow-[0_0_20px_rgba(59,130,246,0.05)]';
-                    iconNode = <Cpu className="w-5 h-5 text-blue-400" />;
+                    iconNode = <Cpu className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />;
                     badgeText = '计算公式';
                   } else if (section.type === 'comparison') {
                     cardStyle = 'border-indigo-500/30 bg-gradient-to-br from-indigo-500/10 to-slate-900/60 shadow-[0_0_20px_rgba(99,102,241,0.05)]';
-                    iconNode = <Layers className="w-5 h-5 text-indigo-400" />;
+                    iconNode = <Layers className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-400" />;
                     badgeText = '对比辨析';
                   } else {
                     cardStyle = 'border-slate-800 bg-slate-900/70 shadow-lg';
-                    iconNode = <Lightbulb className="w-5 h-5 text-emerald-400" />;
+                    iconNode = <Lightbulb className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400" />;
                     badgeText = '核心知识';
                   }
 
                   return (
-                    <article key={idx} className={`p-6 lg:p-7 rounded-2xl border backdrop-blur-sm ${cardStyle} transition-all duration-200`}>
-                      <div className="flex items-center justify-between gap-3 mb-4">
-                        <div className="flex items-center gap-3">
-                          <div className="p-2 rounded-xl bg-slate-950/60 border border-slate-800">
+                    <article key={idx} className={`p-4 sm:p-6 lg:p-7 rounded-2xl border backdrop-blur-sm ${cardStyle} transition-all duration-200 min-w-0 max-w-full overflow-hidden`}>
+                      <div className="flex flex-wrap sm:flex-nowrap items-start sm:items-center justify-between gap-2.5 sm:gap-3 mb-4">
+                        <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                          <div className="p-1.5 sm:p-2 rounded-xl bg-slate-950/60 border border-slate-800 shrink-0">
                             {iconNode}
                           </div>
-                          <h3 className="text-lg lg:text-xl font-bold text-slate-100">{section.title}</h3>
+                          <h3 className="text-base sm:text-lg lg:text-xl font-bold text-slate-100 break-words">{section.title}</h3>
                         </div>
-                        <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-950/60 text-slate-300 border border-slate-800">
+                        <span className="px-2.5 py-0.5 rounded-full text-[11px] sm:text-xs font-semibold bg-slate-950/60 text-slate-300 border border-slate-800 shrink-0 self-start sm:self-auto">
                           {badgeText}
                         </span>
                       </div>
