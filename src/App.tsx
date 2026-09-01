@@ -31,6 +31,7 @@ import { obcaTopics } from './data/topics';
 import { examQuestions } from './data/mockQuestions';
 import { PracticeQuiz } from './components/PracticeQuiz';
 import { QuickReferenceView } from './components/QuickReferenceView';
+import { MarkdownRenderer } from './components/MarkdownRenderer';
 import { ObcaTopic, TopicSection } from './types';
 
 // Helper to render lucide icon dynamically based on topic iconName
@@ -347,33 +348,7 @@ export default function App() {
                         </span>
                       </div>
 
-                      <div className="text-slate-300 leading-relaxed text-sm lg:text-base space-y-3.5">
-                        {section.content.split('\n').map((paragraph, i) => {
-                          // Handle markdown tables
-                          if (paragraph.startsWith('|')) {
-                            return (
-                              <div key={i} className="font-mono text-xs overflow-x-auto my-2 py-1 bg-slate-950/40 rounded-lg p-2 border border-slate-800/60">
-                                {paragraph}
-                              </div>
-                            );
-                          }
-
-                          return (
-                            <p key={i}>
-                              {paragraph.split(/(\*\*.*?\*\*)/).map((part, j) => {
-                                if (part.startsWith('**') && part.endsWith('**')) {
-                                  return (
-                                    <strong key={j} className={`font-bold ${activeTopic.color}`}>
-                                      {part.slice(2, -2)}
-                                    </strong>
-                                  );
-                                }
-                                return part;
-                              })}
-                            </p>
-                          );
-                        })}
-                      </div>
+                      <MarkdownRenderer content={section.content} />
                     </article>
                   );
                 })}
